@@ -6,11 +6,6 @@ point v[] =
 {0.0, 1.0, 0.0},
 {-1.0, -0.5, 0.0},
 {1.0, -0.5, 0.0} };
-float colors[4][3] = 	
-{ {1.0, 0.0, 0.0},
-{0.0, 1.0, 0.0},
-{0.0, 0.0, 1.0},
-{0.0, 0.0, 0.0} };
 int n;
 
 void triangle(point a, point b, point c){
@@ -19,17 +14,6 @@ void triangle(point a, point b, point c){
 	glVertex3fv(b);
 	glVertex3fv(c);
 	glEnd();
-}
-
-void tetra(float *a, float *b, float *c, float *d){
-	glColor3fv(colors[0]);
-	triangle(a,b,c); 
-	glColor3fv(colors[1]);
-	triangle(a,c,d);
-	glColor3fv(colors[2]);
-	triangle(a,d,b);
-	glColor3fv(colors[3]);
-	triangle(b,d,c);
 }
 
 void divide_tetra(point a, point b, point c, int m){
@@ -68,14 +52,14 @@ void display(void){
 	glFlush();
 }
 
-void myReshape(int w, int b){
-	glViewport(0, 0, w, b);
+void myReshape(int w, int h){
+	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	if(w<=b)
-		glOrtho(-2.0, 2.0, -2.0*(float)b/(float)w, 2.0*(float)b/(float)w, -10.0, 10.0);
+	if(w<=h)
+		glOrtho(-2.0, 2.0, -2.0*(float)h/(float)w, 2.0*(float)h/(float)w, -10.0, 10.0);
 	else
-		glOrtho(-2.0*(float)b/(float)w, 2.0*(float)b/(float)w, -2.0, 2.0, -10.0, 10.0);
+		glOrtho(-2.0*(float)h/(float)w, 2.0*(float)h/(float)w, -2.0, 2.0, -10.0, 10.0);
 	glMatrixMode(GL_MODELVIEW);
 	glutPostRedisplay();
 }
@@ -94,5 +78,7 @@ int main(int argc, char *argv[]){
 	return 0;
 }
 
+		
+		
 		
 		
